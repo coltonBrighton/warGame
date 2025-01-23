@@ -169,6 +169,7 @@ class warGame {
     deck.createDeck();
     deck.shuffle();
     let hands = deck.dealToPlayers(4, 13);
+    console.log(hands)
     // actually dealing to players
     this.player1.hand = hands[0];
     this.player2.hand = hands[1];
@@ -180,8 +181,8 @@ class warGame {
       // conditional for awarding points based on compared card value.
       if (
         this.player1.hand[i].value > this.player2.hand[i].value &&
-        this.player3.hand[i].value &&
-        this.player4.hand[i].value
+        this.player1.hand[i].value > this.player3.hand[i].value &&
+        this.player1.hand[i].value > this.player4.hand[i].value
       ) {
         this.player1.score++;
         alert(`
@@ -194,8 +195,8 @@ class warGame {
             `);
       } else if (
         this.player2.hand[i].value > this.player1.hand[i].value &&
-        this.player3.hand[i].value &&
-        this.player4.hand[i].value
+        this.player2.hand[i].value > this.player3.hand[i].value &&
+        this.player2.hand[i].value > this.player4.hand[i].value
       ) {
         this.player2.score++;
         alert(`
@@ -208,9 +209,10 @@ class warGame {
             `);
       } else if (
         this.player3.hand[i].value > this.player1.hand[i].value &&
-        this.player2.hand[i].value &&
-        this.player4.hand[i].value
+        this.player3.hand[i].value > this.player2.hand[i].value &&
+        this.player3.hand[i].value > this.player4.hand[i].value
       ) {
+        this.player3.score++;
         alert(`
                 P1 Card: ${this.player1.hand[i].name}
                 P2 Card: ${this.player2.hand[i].name}
@@ -221,9 +223,10 @@ class warGame {
             `);
       } else if (
         this.player4.hand[i].value > this.player1.hand[i].value &&
-        this.player2.hand[i].value &&
-        this.player3.hand[i].value
+        this.player4.hand[i].value > this.player2.hand[i].value &&
+        this.player4.hand[i].value > this.player3.hand[i].value
       ) {
+        this.player4.score++;
         alert(`
                 P1 Card: ${this.player1.hand[i].name}
                 P2 Card: ${this.player2.hand[i].name}
@@ -236,6 +239,8 @@ class warGame {
         alert(`
                 P1 Card: ${this.player1.hand[i].name}
                 P2 Card: ${this.player2.hand[i].name}
+                P3 Card: ${this.player3.hand[i].name}
+                P4 Card: ${this.player4.hand[i].name}
                 Tie: No points Awarded
                 Current Score: P1: ${this.player1.score}, P2: ${this.player2.score}, P3: ${this.player3.score}, P4: ${this.player4.score} 
             `);
@@ -243,49 +248,52 @@ class warGame {
     }
 
     if (
-      this.player1.hand[i].value > this.player2.hand[i].value &&
-      this.player3.hand[i].value &&
-      this.player4.hand[i].value
+        this.player1.score > this.player2.score &&
+        this.player1.score > this.player3.score &&
+        this.player1.score > this.player4.score
     ) {
       alert(`Player 1 wins!
-                Final Score: Player 1: ${this.player1.score} 
-                            Player 2: ${this.player2.score}
-                            Player 3: ${this.player3.score}
-                            player 4: ${this.player4.score}
-                `);
+                    Final Score: Player 1: ${this.player1.score} 
+                                Player 2: ${this.player2.score}
+                                Player 3: ${this.player3.score}
+                                player 4: ${this.player4.score}
+                    `);
     } else if (
-      this.player2.hand[i].value > this.player1.hand[i].value &&
-      this.player3.hand[i].value &&
-      this.player4.hand[i].value
+        this.player2.score > this.player1.score &&
+        this.player2.score > this.player3.score &&
+        this.player2.score > this.player4.score
     ) {
       alert(`Player 2 wins!
-                Final Score: Player 1: ${this.player1.score} 
-                            Player 2: ${this.player2.score}
-                            Player 3: ${this.player3.score}
-                            player 4: ${this.player4.score}
-                `);
+                    Final Score: 
+                    Player 1: ${this.player1.score} 
+                    Player 2: ${this.player2.score}
+                    Player 3: ${this.player3.score}
+                    player 4: ${this.player4.score}
+                    `);
     } else if (
-      this.player3.hand[i].value > this.player1.hand[i].value &&
-      this.player2.hand[i].value &&
-      this.player4.hand[i].value
+        this.player3.score > this.player1.score &&
+        this.player3.score > this.player2.score &&
+        this.player3.score > this.player4.score
     ) {
-      alert(`Player 2 wins!
-                Final Score: Player 1: ${this.player1.score} 
-                            Player 2: ${this.player2.score}
-                            Player 3: ${this.player3.score}
-                            player 4: ${this.player4.score}
-                `);
+      alert(`Player 3 wins!
+                    Final Score: 
+                    Player 1: ${this.player1.score} 
+                    Player 2: ${this.player2.score}
+                    Player 3: ${this.player3.score}
+                    player 4: ${this.player4.score}
+                    `);
     } else if (
-      this.player4.hand[i].value > this.player1.hand[i].value &&
-      this.player2.hand[i].value &&
-      this.player3.hand[i].value
+        this.player4.score > this.player1.score &&
+        this.player4.score > this.player2.score &&
+        this.player4.score > this.player3.score
     ) {
-      alert(`Player 2 wins!
-                Final Score: Player 1: ${this.player1.score} 
-                            Player 2: ${this.player2.score}
-                            Player 3: ${this.player3.score}
-                            player 4: ${this.player4.score}
-                `);
+      alert(`Player 4 wins!
+                    Final Score: 
+                    Player 1: ${this.player1.score} 
+                    Player 2: ${this.player2.score}
+                    Player 3: ${this.player3.score}
+                    player 4: ${this.player4.score}
+                    `);
     } else {
       alert(`Tie`);
     }
@@ -341,6 +349,8 @@ class Menu {
     game.fourPlayerGame();
   }
 }
+
+
 
 let menu = new Menu();
 menu.start();
