@@ -14,7 +14,7 @@ class Deck {
   // each deck of cards has 52 cards
   constructor() {
     this.deck = [];
-    this.rank = [
+    this.ranks = [
       "2",
       "3",
       "4",
@@ -29,7 +29,7 @@ class Deck {
       "King",
       "Ace",
     ];
-    this.suit = ["Spades ♠️", "Hearts ♥️", "Diamonds ♦️", "Clubs ♣️"];
+    this.suits = ["Spades ♠️", "Hearts ♥️", "Diamonds ♦️", "Clubs ♣️"];
   }
 
   // Building the deck
@@ -37,11 +37,11 @@ class Deck {
     // deck array
     // need each rank to have one of each suit
     // could use a for loop nested in a for loop
-    for (let i = 0; i < this.suit.length; i++) {
-      for (let j = 0; j < this.rank.length; j++) {
+    for (let rank of this.ranks) {
+      for (let suit of this.suits) {
         let card = {
-          name: `${this.rank[j]} of ${this.suit[i]}`,
-          value: j + 1,
+          name: `${rank} of ${suit}`,
+          value: suit + 1,
         };
         // add cards to the deck
         this.deck.push(card);
@@ -87,13 +87,13 @@ class Deck {
 class warGame {
   constructor() {
     // create players
-    this.player1 = {
-      name: "Player 1",
+    this.p1 = {
+      name: "Billy",
       score: 0,
       hand: [],
     };
-    this.player2 = {
-      name: "Player 2",
+    this.p2 = {
+      name: "Bob",
       score: 0,
       hand: [],
     };
@@ -107,47 +107,47 @@ class warGame {
     let hands = deck.dealToPlayers(2, 26);
 
     // actually dealing to players
-    this.player1.hand = hands[0];
-    this.player2.hand = hands[1];
+    this.p1.hand = hands[0];
+    this.p2.hand = hands[1];
 
     // playing the game
-    for (let i = 0; i < this.player1.hand.length; i++) {
+    for (let i = 0; i < this.p1.hand.length; i++) {
       // conditional for awarding points based on compared card value.
-      if (this.player1.hand[i].value > this.player2.hand[i].value) {
-        this.player1.score++;
+      if (this.p1.hand[i].value > this.p2.hand[i].value) {
+        this.p1.score++;
         console.log(`
-                P1 Card: ${this.player1.hand[i].name}
-                P2 Card: ${this.player2.hand[i].name}
-                Player 1 wins a point!
-                Current Score: P1: ${this.player1.score}, P2: ${this.player2.score}
+          ${this.p1.name}'s Card: ${this.p1.hand[i].name}
+          ${this.p2.name}'s Card: ${this.p2.hand[i].name}
+          ${this.p1.name} wins a point!
+          Current Score: ${this.p1.name}: ${this.p1.score}, ${this.p2.name}: ${this.p2.score}
         `);
-      } else if (this.player2.hand[i].value > this.player1.hand[i].value) {
-        this.player2.score++;
+      } else if (this.p2.hand[i].value > this.p1.hand[i].value) {
+        this.p2.score++;
         console.log(`
-                P1 Card: ${this.player1.hand[i].name}
-                P2 Card: ${this.player2.hand[i].name}
-                Player 2 wins a point!
-                Current Score: P1: ${this.player1.score}, P2 ${this.player2.score}
+          ${this.p1.name}'s Card: ${this.p1.hand[i].name}
+          ${this.p2.name}'s Card: ${this.p2.hand[i].name}
+          ${this.p2.name} wins a point!
+          Current Score: ${this.p1.name}: ${this.p1.score}, ${this.p2.name}: ${this.p2.score}
         `);
       } else {
         console.log(`
-                P1 Card: ${this.player1.hand[i].name}
-                P2 Card: ${this.player2.hand[i].name}
-                Tie: No points Awarded
-                Current Score: P1: ${this.player1.score}, P2 ${this.player2.score}
+          ${this.p1.name}'s Card: ${this.p1.hand[i].name}
+          ${this.p2.name}'s Card: ${this.p2.hand[i].name}
+          Tie: No one gets a point
+          Current Score: ${this.p1.name}: ${this.p1.score}, ${this.p2.name}: ${this.p2.score}
         `);
       }
     }
     // calculate score and alert
-    if (this.player1.score > this.player2.score) {
-      console.log(`Player 1 wins!
-            Final Score: Player 1: ${this.player1.score} 
-                         Player 2: ${this.player2.score}
+    if (this.p1.score > this.p2.score) {
+      console.log(`${this.p1.name} wins!
+        Final Score: ${this.p1.name}: ${this.p1.score} 
+                     ${this.p2.name}: ${this.p2.score}
             `);
-    } else if (this.player2.score > this.player1.score) {
-      console.log(`Player 2 wins!
-            Final Score: Player 1: ${this.player1.score} 
-                         Player 2: ${this.player2.score}
+    } else if (this.p2.score > this.p1.score) {
+      console.log(`${this.p2.name} wins!
+        Final Score: ${this.p1.name}: ${this.p1.score} 
+                     ${this.p2.name}: ${this.p2.score}
             `);
     } else {
       console.log(`The game has resulted in a Tie`);

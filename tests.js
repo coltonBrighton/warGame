@@ -1,4 +1,4 @@
-// importing expect function from chai library
+// importing expect function from chai
 let expect = chai.expect; 
 
 // describe what is to be tested
