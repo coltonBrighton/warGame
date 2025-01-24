@@ -70,8 +70,8 @@ class Deck {
       return;
     }
 
+// using playerHands to split an array between numPlayers
     this.playerHands = Array(numPlayers);
-
     for (let i = 0; i < numPlayers; i++) {
       this.playerHands[i] = this.deck.slice(
         cardsPerPlayer * i,
