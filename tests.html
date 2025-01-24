@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Testing using Mocha and Chai for warGame</title>
+    <!-- link to Mocha's CSS for styling test results looks nice :3 -->
+    <link rel="stylesheet" href="./node_modules/mocha/mocha.css" />
+  </head>
+  <body>
+    <!-- div outputs mocha results -->
+    <div id="mocha">
+        <!-- Nav link -->
+         <p><a href=".">Index</a></p>
+
+    </div>
+    <!-- include and enusre mocha.js version 10.2.0 is installed -->
+    <script src="./node_modules/mocha/mocha.js"></script>
+
+    <!-- include and enusre chai.js version 4.3.10 is installed -->
+    <script src="./node_modules/chai/chai.js"></script>
+
+    <!-- including warGame.js for testing -->
+    <script src="./warGame.js"></script>
+    <script>
+      // setting up mocha with 'bdd' interface
+      mocha.setup("bdd");
+    </script>
+    <!-- JavaScript file containing Mocha/Chai test -->
+    <script src="./tests.js"></script>
+
+    <script>
+      // execute the testss. defined in the test file
+      mocha.run();
+    </script>
+  </body>
+</html>

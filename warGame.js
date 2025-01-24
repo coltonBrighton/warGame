@@ -15,7 +15,6 @@ class Deck {
   constructor() {
     this.deck = [];
     this.rank = [
-      "Ace",
       "2",
       "3",
       "4",
@@ -28,6 +27,7 @@ class Deck {
       "Jack",
       "Queen",
       "King",
+      "Ace",
     ];
     this.suit = ["Spades ♠️", "Hearts ♥️", "Diamonds ♦️", "Clubs ♣️"];
   }
@@ -97,19 +97,9 @@ class warGame {
       score: 0,
       hand: [],
     };
-    this.player3 = {
-      name: "Player 1",
-      score: 0,
-      hand: [],
-    };
-    this.player4 = {
-      name: "Player 2",
-      score: 0,
-      hand: [],
-    };
   }
 
-  twoPlayerGame() {
+  playGame() {
     // instantiate new deck, create deck, then shuffle
     let deck = new Deck();
     deck.createDeck();
@@ -125,7 +115,7 @@ class warGame {
       // conditional for awarding points based on compared card value.
       if (this.player1.hand[i].value > this.player2.hand[i].value) {
         this.player1.score++;
-        alert(`
+        console.log(`
                 P1 Card: ${this.player1.hand[i].name}
                 P2 Card: ${this.player2.hand[i].name}
                 Player 1 wins a point!
@@ -133,14 +123,14 @@ class warGame {
         `);
       } else if (this.player2.hand[i].value > this.player1.hand[i].value) {
         this.player2.score++;
-        alert(`
+        console.log(`
                 P1 Card: ${this.player1.hand[i].name}
                 P2 Card: ${this.player2.hand[i].name}
                 Player 2 wins a point!
                 Current Score: P1: ${this.player1.score}, P2 ${this.player2.score}
         `);
       } else {
-        alert(`
+        console.log(`
                 P1 Card: ${this.player1.hand[i].name}
                 P2 Card: ${this.player2.hand[i].name}
                 Tie: No points Awarded
@@ -150,207 +140,20 @@ class warGame {
     }
     // calculate score and alert
     if (this.player1.score > this.player2.score) {
-      alert(`Player 1 wins!
+      console.log(`Player 1 wins!
             Final Score: Player 1: ${this.player1.score} 
                          Player 2: ${this.player2.score}
             `);
     } else if (this.player2.score > this.player1.score) {
-      alert(`Player 2 wins!
+      console.log(`Player 2 wins!
             Final Score: Player 1: ${this.player1.score} 
                          Player 2: ${this.player2.score}
             `);
     } else {
-      alert(`Tie`);
-    }
-  }
-
-  fourPlayerGame() {
-    let deck = new Deck();
-    deck.createDeck();
-    deck.shuffle();
-    let hands = deck.dealToPlayers(4, 13);
-    console.log(hands)
-    // actually dealing to players
-    this.player1.hand = hands[0];
-    this.player2.hand = hands[1];
-    this.player3.hand = hands[2];
-    this.player4.hand = hands[3];
-
-    // playing the game
-    for (let i = 0; i < this.player1.hand.length; i++) {
-      // conditional for awarding points based on compared card value.
-      if (
-        this.player1.hand[i].value > this.player2.hand[i].value &&
-        this.player1.hand[i].value > this.player3.hand[i].value &&
-        this.player1.hand[i].value > this.player4.hand[i].value
-      ) {
-        this.player1.score++;
-        alert(`
-                    P1 Card: ${this.player1.hand[i].name}
-                    P2 Card: ${this.player2.hand[i].name}
-                    P3 Card: ${this.player3.hand[i].name}
-                    P4 Card: ${this.player4.hand[i].name}
-                    Player 1 wins a point!
-                    Current Score: P1: ${this.player1.score}, P2: ${this.player2.score}, P3: ${this.player3.score}, P4: ${this.player4.score}
-            `);
-      } else if (
-        this.player2.hand[i].value > this.player1.hand[i].value &&
-        this.player2.hand[i].value > this.player3.hand[i].value &&
-        this.player2.hand[i].value > this.player4.hand[i].value
-      ) {
-        this.player2.score++;
-        alert(`
-                    P1 Card: ${this.player1.hand[i].name}
-                    P2 Card: ${this.player2.hand[i].name}
-                    P3 Card: ${this.player3.hand[i].name}
-                    P4 Card: ${this.player4.hand[i].name}
-                    Player 2 wins a point!
-                    Current Score: P1: ${this.player1.score}, P2: ${this.player2.score}, P3: ${this.player3.score}, P4: ${this.player4.score}
-            `);
-      } else if (
-        this.player3.hand[i].value > this.player1.hand[i].value &&
-        this.player3.hand[i].value > this.player2.hand[i].value &&
-        this.player3.hand[i].value > this.player4.hand[i].value
-      ) {
-        this.player3.score++;
-        alert(`
-                P1 Card: ${this.player1.hand[i].name}
-                P2 Card: ${this.player2.hand[i].name}
-                P3 Card: ${this.player3.hand[i].name}
-                P4 Card: ${this.player4.hand[i].name}
-                Player 3 wins a point!
-                Current Score: P1: ${this.player1.score}, P2: ${this.player2.score}, P3: ${this.player3.score}, P4: ${this.player4.score}
-            `);
-      } else if (
-        this.player4.hand[i].value > this.player1.hand[i].value &&
-        this.player4.hand[i].value > this.player2.hand[i].value &&
-        this.player4.hand[i].value > this.player3.hand[i].value
-      ) {
-        this.player4.score++;
-        alert(`
-                P1 Card: ${this.player1.hand[i].name}
-                P2 Card: ${this.player2.hand[i].name}
-                P3 Card: ${this.player3.hand[i].name}
-                P4 Card: ${this.player4.hand[i].name}
-                Player 4 wins a point!
-                Current Score: P1: ${this.player1.score}, P2: ${this.player2.score}, P3: ${this.player3.score}, P4: ${this.player4.score}
-            `);
-      } else {
-        alert(`
-                P1 Card: ${this.player1.hand[i].name}
-                P2 Card: ${this.player2.hand[i].name}
-                P3 Card: ${this.player3.hand[i].name}
-                P4 Card: ${this.player4.hand[i].name}
-                Tie: No points Awarded
-                Current Score: P1: ${this.player1.score}, P2: ${this.player2.score}, P3: ${this.player3.score}, P4: ${this.player4.score} 
-            `);
-      }
-    }
-
-    if (
-        this.player1.score > this.player2.score &&
-        this.player1.score > this.player3.score &&
-        this.player1.score > this.player4.score
-    ) {
-      alert(`Player 1 wins!
-                    Final Score: Player 1: ${this.player1.score} 
-                                Player 2: ${this.player2.score}
-                                Player 3: ${this.player3.score}
-                                player 4: ${this.player4.score}
-                    `);
-    } else if (
-        this.player2.score > this.player1.score &&
-        this.player2.score > this.player3.score &&
-        this.player2.score > this.player4.score
-    ) {
-      alert(`Player 2 wins!
-                    Final Score: 
-                    Player 1: ${this.player1.score} 
-                    Player 2: ${this.player2.score}
-                    Player 3: ${this.player3.score}
-                    player 4: ${this.player4.score}
-                    `);
-    } else if (
-        this.player3.score > this.player1.score &&
-        this.player3.score > this.player2.score &&
-        this.player3.score > this.player4.score
-    ) {
-      alert(`Player 3 wins!
-                    Final Score: 
-                    Player 1: ${this.player1.score} 
-                    Player 2: ${this.player2.score}
-                    Player 3: ${this.player3.score}
-                    player 4: ${this.player4.score}
-                    `);
-    } else if (
-        this.player4.score > this.player1.score &&
-        this.player4.score > this.player2.score &&
-        this.player4.score > this.player3.score
-    ) {
-      alert(`Player 4 wins!
-                    Final Score: 
-                    Player 1: ${this.player1.score} 
-                    Player 2: ${this.player2.score}
-                    Player 3: ${this.player3.score}
-                    player 4: ${this.player4.score}
-                    `);
-    } else {
-      alert(`Tie`);
+      console.log(`The game has resulted in a Tie`);
     }
   }
 }
 
-// Menu Class
-class Menu {
-  constructor() {
-    this.wins = [];
-  }
-
-  //   handle selection of players
-
-  start() {
-    let selection = this.showMenuOpt();
-    while (selection != 0) {
-      switch (selection) {
-        case "1":
-          this.twoPlayers();
-          break;
-        case "2":
-          this.fourPlayers();
-          break;
-        default:
-          selection = 0;
-      }
-
-      selection = this.showMenuOpt();
-    }
-
-    alert("Goodbye!");
-  }
-
-  //   Prompt user to select number of players
-  showMenuOpt() {
-    return prompt(`
-        How many players would you like to simulate?
-        ---------------------------------------------
-        0) Exit
-        1) Two Players
-        2) Four Players
-        `);
-  }
-
-  twoPlayers() {
-    let game = new warGame();
-    game.twoPlayerGame();
-  }
-
-  fourPlayers() {
-    let game = new warGame();
-    game.fourPlayerGame();
-  }
-}
-
-
-
-let menu = new Menu();
-menu.start();
+let game = new warGame();
+game.playGame();
